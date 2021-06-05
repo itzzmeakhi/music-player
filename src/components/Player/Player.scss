@@ -8,12 +8,44 @@
         width: 50%;
         display: flex;
         flex-direction: row;
-        input {
+        align-items: center;
+        .track {
             width: 90%;
-            padding: 1rem 2rem;
+            background: lightblue;
+            border-radius: 10px;
+            position: relative;
+            height: 0.7rem;
+            overflow: hidden;
+            input {
+                width: 100%;
+                -webkit-appearance: none;
+                background-color: transparent;
+                cursor: pointer;
+                &:focus {
+                    outline: none;
+                }
+                &::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    border: none;
+                    height: 1rem;
+                    width: 0.7rem;
+                }
+            }
+            .animate-track {
+                background: rgb(218, 218, 218);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transform: translateX(100%);
+                pointer-events: none;
+            }
         }
+
         p {
-            padding: 2rem;
+            width: 5%;
+            padding: 0rem 1rem;
         }
     }
     .player-controls {
