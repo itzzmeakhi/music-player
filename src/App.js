@@ -20,18 +20,19 @@ const App = () => {
             <Nav 
                 libraryStatus={libraryStatus}
                 setLibraryStatus={setLibraryStatus} />
-            <Song currentSong={currentSong} />
+            <Song 
+                currentSong={currentSong} />
             <Player 
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
                 currentSong={currentSong} 
                 songs={songs}
-                setSongs={setSongs}
-            />
+                setSongs={setSongs} />
             <Library 
                 songs={songs} 
                 setSongs={setSongs}
-                libraryStatus={libraryStatus} />
+                libraryStatus={libraryStatus}
+                setLibraryStatus={setLibraryStatus} />
         </ >
     )
 }

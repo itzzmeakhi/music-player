@@ -5,7 +5,7 @@ import LibrarySong from './../LibrarySong/LibrarySong';
 
 import './Library.scss';
 
-const Library = ({ songs, setSongs, libraryStatus }) => {
+const Library = ({ songs, setSongs, libraryStatus, setLibraryStatus }) => {
     const setActiveSong = (id) => {
         const updatedSongs = songs.map(song => {
             return {...song, active: song.id === id ? true : false}
@@ -20,7 +20,9 @@ const Library = ({ songs, setSongs, libraryStatus }) => {
                     <LibrarySong 
                         key={song.id} 
                         song={song}
-                        setActiveSong={setActiveSong} />
+                        setActiveSong={setActiveSong}
+                        libraryStatus={libraryStatus}
+                        setLibraryStatus={setLibraryStatus} />
                 ))}
             </div>
         </div>
@@ -30,7 +32,8 @@ const Library = ({ songs, setSongs, libraryStatus }) => {
 Library.propTypes = {
     songs: PropTypes.array,
     setSongs: PropTypes.func,
-    libraryStatus: PropTypes.bool
+    libraryStatus: PropTypes.bool,
+    setLibraryStatus: PropTypes.func
 };
 
 export default Library;

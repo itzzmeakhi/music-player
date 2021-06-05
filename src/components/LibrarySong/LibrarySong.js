@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 
 import './LibrarySong.scss';
 
-const LibrarySong = ({ song, setActiveSong }) => {
+const LibrarySong = ({ song, setActiveSong, libraryStatus, setLibraryStatus }) => {
+    const selectSongHandler = () => {
+        setActiveSong(song.id);
+        setLibraryStatus(!libraryStatus);
+    }
+
     return (
-        <div className={`library-song ${song.active ? 'selected' : ''}`} onClick={() => setActiveSong(song.id)}>
+        <div className={`library-song ${song.active ? 'selected' : ''}`} onClick={selectSongHandler}>
             <img src={song.cover} alt={song.name} />
             <div className="song-description">
                 <h3>{song.name}</h3>
@@ -17,7 +22,9 @@ const LibrarySong = ({ song, setActiveSong }) => {
 
 LibrarySong.propTypes = {
     song: PropTypes.object,
-    setActiveSong: PropTypes.func
+    setActiveSong: PropTypes.func,
+    libraryStatus: PropTypes.bool,
+    setLibraryStatus: PropTypes.func
 };
 
 export default LibrarySong;
