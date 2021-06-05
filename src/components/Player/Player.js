@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import { SKIP_BACK, SKIP_FORWARD } from './../../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faPlay, faPause, faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 import './Player.scss';
 
-const Player = ({ currentSong, isPlaying, setIsPlaying, songs, setSongs }) => {
+const Player = ({ currentSong, isPlaying, setIsPlaying, songs, setSongs, favorites, setFavorites }) => {
 
     const songRef = useRef(null);
+    const isInFavorites = favorites.some(fav => fav.favoriteId === currentSong.id);
     const [songTimeInfo, setSongTimeInfo] = useState(
         {
             currentTime: 0,
@@ -48,7 +49,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying, songs, setSongs }) => {
         if(isPlaying) {
             songRef.current.play();
         }
-    }
+    };
 
     const dragHandler = (event) => {
         const { value } = event.target;
@@ -83,12 +84,38 @@ const Player = ({ currentSong, isPlaying, setIsPlaying, songs, setSongs }) => {
         ]);
     };
 
+    const addToFavorite = () => {
+        const favoriteId = currentSong.id;
+        if(!isInFavorites) {
+            setFavorites([
+                ...favorites,
+                { 'favoriteId': favoriteId }
+            ]);
+        } else {
+            const updatedFavorites = favorites.filter(fav => fav.favoriteId !== currentSong.id);
+            setFavorites([
+                ...updatedFavorites
+            ]);
+        }
+    };
+
     const trackAnim = {
         transform: `translateX(${songTimeInfo.percentAnimation}%)`
     };
 
     return ( 
         <div className="player-container">
+
+            <div className="favorite-controls">
+                <FontAwesomeIcon
+                    size="1x"
+                    icon={faEllipsisV} />
+                <FontAwesomeIcon 
+                    size="1x"
+                    style={{color: `${isInFavorites ? '#ee5253' : '#000'}`}}
+                    onClick={addToFavorite}
+                    icon={faHeart} />
+            </div>
 
             <div className="time-controls">
                 <p>{getTime(songTimeInfo.currentTime)}</p>
@@ -141,7 +168,9 @@ Player.propTypes = {
     isPlaying: PropTypes.bool,
     setIsPlaying: PropTypes.func,
     songs: PropTypes.array,
-    setSongs: PropTypes.func
+    setSongs: PropTypes.func,
+    favorites: PropTypes.array,
+    setFavorites: PropTypes.func
 };
 
 export default Player;

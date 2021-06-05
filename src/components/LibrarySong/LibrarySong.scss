@@ -2,6 +2,9 @@
     display: flex;
     cursor: pointer;
     padding: 1rem 2rem 1rem 1rem;
+    img {
+        border-radius: 10px;
+    }
     &:hover {
         background-color: rgb(218, 218, 218);
     }
