@@ -6,8 +6,12 @@ import { SECTION_SONGS, SECTION_FAVORITES } from './../../utils/constants';
 
 import './Library.scss';
 
-const Library = ({ songs, setSongs, libraryStatus, setLibraryStatus, favorites }) => {
-
+const Library = ({ 
+    songs, 
+    setSongs, 
+    libraryStatus, 
+    setLibraryStatus, 
+    setIsInFavorites }) => {
     return (
         <div className={`library ${libraryStatus ? 'active' : ''}`}>
 
@@ -18,7 +22,8 @@ const Library = ({ songs, setSongs, libraryStatus, setLibraryStatus, favorites }
                 setLibraryStatus={setLibraryStatus}
                 defaultAccordionStatus={true}
                 setSongs={setSongs}
-                isFavorites={false} />
+                isFavorites={false}
+                setIsInFavorites={setIsInFavorites} />
 
             <LibrarySection
                 name={SECTION_FAVORITES}
@@ -27,8 +32,8 @@ const Library = ({ songs, setSongs, libraryStatus, setLibraryStatus, favorites }
                 setLibraryStatus={setLibraryStatus}
                 defaultAccordionStatus={false}
                 setSongs={setSongs}
-                favorites={favorites}
-                isFavorites={true} />
+                isFavorites={true}
+                setIsInFavorites={setIsInFavorites} />
 
         </div>
     )
@@ -39,7 +44,7 @@ Library.propTypes = {
     setSongs: PropTypes.func,
     libraryStatus: PropTypes.bool,
     setLibraryStatus: PropTypes.func,
-    favorites: PropTypes.array
+    setIsInFavorites: PropTypes.func
 };
 
 export default Library;

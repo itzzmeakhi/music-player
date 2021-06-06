@@ -9,25 +9,23 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import './LibrarySection.scss';
 
 const LibrarySection = ({ 
-        name, 
-        songs, 
-        libraryStatus, 
-        setLibraryStatus, 
-        setSongs, 
-        defaultAccordionStatus,
-        favorites,
-        isFavorites }) => {
+    name, 
+    songs, 
+    libraryStatus, 
+    setLibraryStatus, 
+    setSongs, 
+    defaultAccordionStatus,
+    isFavorites,
+    setIsInFavorites }) => {
     const [accordionStatus, setAccordionStatus] = useState(defaultAccordionStatus);
-    const favoriteSongs = isFavorites && songs.filter(song => favorites.some(fav => fav.favoriteId === song.id));
     const setActiveSong = (id) => {
         const updatedSongs = songs.map(song => {
             return {...song, active: song.id === id ? true : false}
         });
         setSongs([...updatedSongs]);
     };
-    const songsList = isFavorites ? [...favoriteSongs] : [...songs];
     return (
-        <div className="library-section">
+        <div className="library-section" onClick={() => setIsInFavorites(isFavorites)}>
             <div 
                 className="library-accordions" 
                 onClick={() =>setAccordionStatus(!accordionStatus)}>
@@ -36,7 +34,7 @@ const LibrarySection = ({
                     icon={accordionStatus ? faChevronUp : faChevronDown} />
             </div>
 
-            {accordionStatus && songsList.map(song => (
+            {accordionStatus && songs.map(song => (
                 <LibrarySong 
                     key={song.id} 
                     song={song}
@@ -55,8 +53,8 @@ LibrarySection.propTypes = {
     setLibraryStatus: PropTypes.func,
     setSongs: PropTypes.func,
     defaultAccordionStatus: PropTypes.bool,
-    favorites: PropTypes.array,
-    isFavorites: PropTypes.bool
+    isFavorites: PropTypes.bool,
+    setIsInFavorites: PropTypes.func
 };
 
 export default LibrarySection;

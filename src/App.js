@@ -14,7 +14,10 @@ const App = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [libraryStatus, setLibraryStatus] = useState(false);
     const [favorites, setFavorites] = useState([]);
+    const [isInFavorites, setIsInFavorites] = useState(false);
     const currentSong = songs[songs.findIndex(song => song.active)];
+    const favoriteSongs = isInFavorites && favorites.length > 0 && songs.filter(song => favorites.some(fav => fav.favoriteId === song.id));
+    const songsList = isInFavorites ? [...favoriteSongs] : [...songs];
     return (
         < >
             <Nav 
@@ -26,15 +29,17 @@ const App = () => {
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
                 currentSong={currentSong} 
-                songs={songs}
+                songs={songsList}
                 setSongs={setSongs}
                 favorites={favorites}
+                isInFavorites={isInFavorites}
                 setFavorites={setFavorites} />
             <Library 
-                songs={songs} 
+                songs={songsList} 
                 setSongs={setSongs}
                 libraryStatus={libraryStatus}
                 favorites={favorites}
+                setIsInFavorites={setIsInFavorites}
                 setLibraryStatus={setLibraryStatus} />
         </ >
     )

@@ -7,10 +7,16 @@ import { faAngleLeft, faAngleRight, faPlay, faPause, faHeart, faEllipsisV } from
 
 import './Player.scss';
 
-const Player = ({ currentSong, isPlaying, setIsPlaying, songs, setSongs, favorites, setFavorites }) => {
-
+const Player = ({ 
+    currentSong, 
+    isPlaying, 
+    setIsPlaying, 
+    songs, 
+    setSongs, 
+    favorites, 
+    setFavorites }) => {
     const songRef = useRef(null);
-    const isInFavorites = favorites.some(fav => fav.favoriteId === currentSong.id);
+    const songInFavorites = favorites.some(fav => fav.favoriteId === currentSong.id);
     const [songTimeInfo, setSongTimeInfo] = useState(
         {
             currentTime: 0,
@@ -86,7 +92,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying, songs, setSongs, favorit
 
     const addToFavorite = () => {
         const favoriteId = currentSong.id;
-        if(!isInFavorites) {
+        if(!songInFavorites) {
             setFavorites([
                 ...favorites,
                 { 'favoriteId': favoriteId }
@@ -112,7 +118,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying, songs, setSongs, favorit
                     icon={faEllipsisV} />
                 <FontAwesomeIcon 
                     size="1x"
-                    style={{color: `${isInFavorites ? '#ee5253' : '#000'}`}}
+                    style={{color: `${songInFavorites ? '#ee5253' : '#000'}`}}
                     onClick={addToFavorite}
                     icon={faHeart} />
             </div>
