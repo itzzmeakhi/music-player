@@ -2,6 +2,12 @@
 
 Developed using React, Node Sass
 
+# Video link
+
+
+https://user-images.githubusercontent.com/22185174/121217575-9c25a480-c89f-11eb-8874-7229c6e74b19.mp4
+
+
 ## Deployment link
 
 Open [Music Player](https://itzzmeakhi.github.io/music-player)
