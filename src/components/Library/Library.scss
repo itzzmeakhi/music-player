@@ -10,6 +10,16 @@
     transform: translateX(-100%);
     transition: all 0.5 ease;
     opacity: 0;
+    .library-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        svg {
+            cursor: pointer;
+        }
+    }
 }
 
 * {
