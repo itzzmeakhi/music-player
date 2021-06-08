@@ -14,7 +14,8 @@ const Library = ({
     setSongs, 
     libraryStatus, 
     setLibraryStatus, 
-    setIsInFavorites }) => {
+    setIsInFavorites,
+    favoriteSongs }) => {
     return (
         <div className={`library ${libraryStatus ? 'active' : ''}`}>
 
@@ -29,6 +30,7 @@ const Library = ({
             <LibrarySection
                 name={SECTION_SONGS}
                 songs={songs}
+                favoriteSongs={favoriteSongs}
                 libraryStatus={libraryStatus}
                 setLibraryStatus={setLibraryStatus}
                 defaultAccordionStatus={true}
@@ -39,6 +41,7 @@ const Library = ({
             <LibrarySection
                 name={SECTION_FAVORITES}
                 songs={songs}
+                favoriteSongs={favoriteSongs}
                 libraryStatus={libraryStatus}
                 setLibraryStatus={setLibraryStatus}
                 defaultAccordionStatus={false}
@@ -55,7 +58,8 @@ Library.propTypes = {
     setSongs: PropTypes.func,
     libraryStatus: PropTypes.bool,
     setLibraryStatus: PropTypes.func,
-    setIsInFavorites: PropTypes.func
+    setIsInFavorites: PropTypes.func,
+    favoriteSongs: PropTypes.array
 };
 
 export default Library;

@@ -14,7 +14,9 @@ const Player = ({
     songs, 
     setSongs, 
     favorites, 
-    setFavorites }) => {
+    setFavorites,
+    isInFavorites,
+    favoriteSongs }) => {
     const songRef = useRef(null);
     const songInFavorites = favorites.some(fav => fav.favoriteId === currentSong.id);
     const [songTimeInfo, setSongTimeInfo] = useState(
@@ -67,24 +69,34 @@ const Player = ({
     };
 
     const songSkipHandler = (direction) => {
-        const currentSongIndex = songs.findIndex(song => song.id === currentSong.id);
+        let songsList = [...songs];
+        if(isInFavorites) {
+            songsList = [...favoriteSongs];
+        }
+        const currentSongIndex = songsList.findIndex(song => song.id === currentSong.id);
         let newSongIndex = currentSongIndex;
         if(direction === SKIP_FORWARD) {
-            newSongIndex = (currentSongIndex + 1) % songs.length;
+            newSongIndex = (currentSongIndex + 1) % songsList.length;
         } else if(direction === SKIP_BACK) {
-            newSongIndex = (currentSongIndex - 1) % songs.length;
-            if(newSongIndex === -1) newSongIndex = songs.length - 1;
+            newSongIndex = (currentSongIndex - 1) % songsList.length;
+            if(newSongIndex === -1) newSongIndex = songsList.length - 1;
         }
-        const updatedSongs = songs.map((song, index) => {return {...song, active: index === newSongIndex ? true: false}});
+        const nextSong = songsList[newSongIndex];
+        const updatedSongs = songs.map(song => {return {...song, active: song.id === nextSong.id ? true: false}});
         setSongs([
             ...updatedSongs
         ]);
     };
 
     const songEndedHandler = () => {
-        const currentSongIndex = songs.findIndex(song => song.id === currentSong.id);
-        const newSongIndex = (currentSongIndex + 1) % songs.length;
-        const updatedSongs = songs.map((song, index) => {return {...song, active: index === newSongIndex ? true: false}});
+        let songsList = [...songs];
+        if(isInFavorites) {
+            songsList = [...favoriteSongs];
+        }
+        const currentSongIndex = songsList.findIndex(song => song.id === currentSong.id);
+        const newSongIndex = (currentSongIndex + 1) % songsList.length;
+        const nextSong = songsList[newSongIndex];
+        const updatedSongs = songs.map(song => {return {...song, active: song.id === nextSong.id ? true: false}});
         setSongs([
             ...updatedSongs
         ]);
@@ -174,8 +186,10 @@ Player.propTypes = {
     isPlaying: PropTypes.bool,
     setIsPlaying: PropTypes.func,
     songs: PropTypes.array,
+    favoriteSongs: PropTypes.array,
     setSongs: PropTypes.func,
     favorites: PropTypes.array,
+    isInFavorites: PropTypes.bool,
     setFavorites: PropTypes.func
 };
 

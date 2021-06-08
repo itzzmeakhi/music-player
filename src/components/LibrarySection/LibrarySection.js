@@ -11,6 +11,7 @@ import './LibrarySection.scss';
 const LibrarySection = ({ 
     name, 
     songs, 
+    favoriteSongs,
     libraryStatus, 
     setLibraryStatus, 
     setSongs, 
@@ -24,6 +25,7 @@ const LibrarySection = ({
         });
         setSongs([...updatedSongs]);
     };
+    const songsList = isFavorites ? [...favoriteSongs] : [...songs];
     return (
         <div className="library-section" onClick={() => setIsInFavorites(isFavorites)}>
             <div 
@@ -34,7 +36,7 @@ const LibrarySection = ({
                     icon={accordionStatus ? faChevronUp : faChevronDown} />
             </div>
 
-            {accordionStatus && songs.map(song => (
+            {accordionStatus && songsList.map(song => (
                 <LibrarySong 
                     key={song.id} 
                     song={song}
@@ -49,6 +51,7 @@ const LibrarySection = ({
 LibrarySection.propTypes = {
     name: PropTypes.string,
     songs: PropTypes.array,
+    favoriteSongs: PropTypes.array,
     libraryStatus: PropTypes.bool,
     setLibraryStatus: PropTypes.func,
     setSongs: PropTypes.func,
