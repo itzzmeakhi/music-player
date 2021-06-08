@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: space-between;
     .favorite-controls {
-        width: 40%;
+        width: 45%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -18,8 +18,9 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
         .track {
-            width: 90%;
+            width: 85%;
             background: lightblue;
             border-radius: 10px;
             position: relative;
@@ -51,10 +52,8 @@
                 pointer-events: none;
             }
         }
-
         p {
             width: 5%;
-            padding: 0rem 1rem;
         }
     }
     .player-controls {
@@ -65,6 +64,23 @@
         justify-content: space-between;
         svg {
             cursor: pointer;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .player-container {
+        .favorite-controls {
+            width: 70%;
+        }
+        .time-controls {
+            width: 80%;
+            .track {
+                width: 70%;
+            }
+        }
+        .player-controls {
+            width: 75%;
         }
     }
 }
