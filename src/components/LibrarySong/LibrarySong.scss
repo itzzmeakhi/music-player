@@ -2,12 +2,13 @@
     display: flex;
     cursor: pointer;
     padding: 1rem 2rem 1rem 1rem;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease color 0.3s ease;
     img {
         border-radius: 10px;
     }
     &:hover {
         background-color: rgb(240, 238, 238);
+        color: #000;
     }
     .song-description {
         display: flex;
@@ -24,4 +25,5 @@
 }
 .selected {
     background: rgb(218, 218, 218);
+    color: #000;
 }

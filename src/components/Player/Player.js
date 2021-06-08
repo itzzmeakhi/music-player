@@ -70,7 +70,7 @@ const Player = ({
 
     const songSkipHandler = (direction) => {
         let songsList = [...songs];
-        if(isInFavorites) {
+        if(isInFavorites && favoriteSongs.length > 0) {
             songsList = [...favoriteSongs];
         }
         const currentSongIndex = songsList.findIndex(song => song.id === currentSong.id);
@@ -90,7 +90,7 @@ const Player = ({
 
     const songEndedHandler = () => {
         let songsList = [...songs];
-        if(isInFavorites) {
+        if(isInFavorites && favoriteSongs.length > 0) {
             songsList = [...favoriteSongs];
         }
         const currentSongIndex = songsList.findIndex(song => song.id === currentSong.id);

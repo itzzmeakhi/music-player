@@ -16,8 +16,19 @@ const Library = ({
     setLibraryStatus, 
     setIsInFavorites,
     favoriteSongs }) => {
+    let color1 = '#fff';
+    let color2 = '#fff';
+    songs.map(song => {
+        if(song.active) {
+            color1 = song.color[0];
+            color2 = song.color[1];
+        }
+    });
+    const gradient = {
+        backgroundImage: `linear-gradient(to right, ${color1}, ${color2})`
+    };
     return (
-        <div className={`library ${libraryStatus ? 'active' : ''}`}>
+        <div className={`library ${libraryStatus ? 'active' : ''}`} style={gradient}>
 
             <div className="library-header">
                 <h2>{SECTION_LIBRARY}</h2>
